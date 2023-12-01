@@ -5,8 +5,9 @@ function UseEffect() {
     const [count, setCount] = useState(0);
     const [printCount, setPrintCount] = useState(0);
 
+    //componentDidMount
     useEffect(() => {
-        //컴포넌트 초기에 한번만 실행(componentDidMount)
+        //컴포넌트 초기에 한번만 실행
         console.log("componentDidMount!");
         
         //unmount(componentWillUnmount)
@@ -16,6 +17,7 @@ function UseEffect() {
     }, []);
 
 
+    //componentDidMount
     useEffect(() => {
         //componentDidUpdate(printCount)
         console.log(`You clicked ${printCount} times`);
