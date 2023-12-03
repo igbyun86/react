@@ -9,7 +9,7 @@ function Main() {
                 <Link to="/useEffect"><li>useEffect</li></Link>
                 <Link to="/useRef"><li>useRef</li></Link>
                 <Link to="/useMemo"><li>useMemo</li></Link>
-                <Link to="/useContext"><li>useContext</li></Link>
+                <Link to="/useCallback"><li>useCallback</li></Link>
             </ul>
         </div>
     );
