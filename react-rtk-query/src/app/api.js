@@ -7,10 +7,7 @@ export const api = createApi({
     endpoints: (builder) => ({
         getCount: builder.query({
             query: ({ name }) => `hello/${name}`,
-            providesTags: (result, error, arg) => {
-                console.log(result, error, arg);
-                return [{ type: "Count", id: arg.name }];
-            }
+
         }),
         setCount: builder.mutation({
             query: ({ name, value }) => {
@@ -25,5 +22,6 @@ export const api = createApi({
     })
 });
 
+export const {useGetCountQuery, useSetCountMutation} = api;
 // use + endpoints + Query(builder.query)의 이름으로 createApi가 hook 자동 생성
 // use + endpoints + Mutation(builder.mutation)의 이름으로 createApi가 hook 자동 생성

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {api} from "./app/api";
 
 const Count = ({ name }) => {
@@ -27,15 +27,32 @@ const Count = ({ name }) => {
   );
 };
 
+function Search() {
+    let query = api.useGetCountQuery({ name: 'ig' });
+    console.log(query.data)
+    return (
+        <div>
+            <span>재조회!</span>
+        </div>
+    )
+}
+
 function App() {
-  return (
-      <>
-        <Count name="ig" />
-        <Count name="ig" />
-        <Count name="jane" />
-        <Count name="steve" />
-      </>
-  );
+
+    const [isClick, setIsClick] = useState(false);
+
+    return (
+        <>
+            <Count name="ig" />
+            <Count name="ig" />
+            <Count name="jane" />
+            <Count name="steve" />
+            <button onClick={(e) =>{ setIsClick(!isClick)}}>ig 재조회</button>
+            {
+                isClick ? <Search/> : null
+            }
+        </>
+    );
 }
 
 export default App;
