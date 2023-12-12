@@ -15,8 +15,13 @@ const SelectBox = (props) => {
     console.log("props.defaultValue", props.defaultValue);
     console.log("useState.defaultValue", defaultValue);
 
+    const handleChange = (e) => {
+        console.log('change selectbox')
+        props.handleChange(e, '11');
+    }
+
     return (
-        <select onChange={props.handleChange} value={props.defaultValue}>
+        <select name='driverType' onChange={handleChange} value={props.defaultValue}>
             {props.options.map((option, idx) => (
                 <option
                     key={idx}
@@ -38,13 +43,26 @@ function App() {
         {name:"전체", value:"05"}
     ];
 
-    const handleChange = (e) => {
+    const handleChange = (e, value) => {
+        console.log(e)
+        console.log(value)
         setDriverInfo((prevState) => ({
             ...prevState,
-            'driverType' : e.target.value
+            [e.target.name] : e.target.value
         }))
         //console.log(e.target.value);
     };
+
+    const handleCheckboxChange = (e) => {
+        console.log(e.target.type)
+        console.log(e.target.tagName)
+        if (!e.target.checked) return;
+
+        setDriverInfo((prevState) => ({
+            ...prevState,
+            [e.target.name] : e.target.value
+        }))
+    }
 
     const [driverInfo, setDriverInfo] = useState(DriverInfo)
     useEffect(() => {
@@ -54,10 +72,10 @@ function App() {
     return (
         <div>
             <SelectBox options={driverOptions} defaultValue={driverInfo.driverType} handleChange={handleChange} /><br/>
-            <input type="text" name="person1" /><br/>
-            <input type="text" name="person2" /><br/>
-            <input type="radio" name="sex" value="1" id="rdo1" defaultChecked={driverInfo.sex === '1'} /> <label htmlFor="rdo1">남자</label>
-            <input type="radio" name="sex" value="2" id="rdo2" defaultChecked={driverInfo.sex === '2'} /> <label htmlFor="rdo2">여자</label><br/>
+            <input type="text" name="person1" onChange={handleChange} /><br/>
+            <input type="text" name="person2" onChange={handleChange}/><br/>
+            <input type="radio" name="sex" value="1" id="rdo1" defaultChecked={driverInfo.sex === '1'} onChange={handleCheckboxChange} /> <label htmlFor="rdo1">남자</label>
+            <input type="radio" name="sex" value="2" id="rdo2" defaultChecked={driverInfo.sex === '2'} onChange={handleCheckboxChange} /> <label htmlFor="rdo2">여자</label><br/>
             <button onClick={() => setDriverInfo((prevState) => ({
                 ...prevState,
                 'driverType' : '01'
